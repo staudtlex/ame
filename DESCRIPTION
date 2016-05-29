@@ -1,0 +1,11 @@
+Package: ame
+Type: Package
+Title: Average Marginal Effects
+Version: 0.1.0
+Author: Alexander Staudt, Julia Partheymueller
+Maintainer: Alexander Staudt <astaudt@mail.uni-mannheim.de>
+Description: ame computes average marginal effects for various generalized linear models.
+License: GPL (>= 2)
+LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports: MASS
