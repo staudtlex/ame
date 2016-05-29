@@ -95,6 +95,6 @@ Note: For a factor variable f, dydx corresponds to the first difference E(Y|f_i)
 ```
 
 # Note
-This version of `ame` only supports `glm` objects with 
+This version of `ame` supports `glm` objects with 
 + `gaussian` model family with `"identity"` link
 + `binomial` model family with `"logit"`/`"probit"` link
