@@ -10,6 +10,8 @@ Main goals: compute marginal effects and standard errors for:
 + spline-functions (for generalized additive models)
 
 ## Installation
+[![Build Status](https://travis-ci.org/staudtlex/ame.svg?branch=master)](https://travis-ci.org/staudtlex/ame)
+
 To install `ame`, simply run
 
 ```R
