@@ -36,7 +36,7 @@ glm_fit <- glm(y ~ mcat + dummy * cont, data = data, family = binomial(link = "l
 glm_ame <- ame(glm_fit, cont_vars = c("cont"), fac_vars = c("mcat", "dummy"), nsim = 1000)
 ```
 
-Use the `summary()` command to display the average marginal effects and first differences of the model:
+Use the `summary()` command to display the average marginal effects and first differences of the model variables:
 ```
 Continuous variables: cont 
 Factor variables:     mcat, dummy 
