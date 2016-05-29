@@ -3,6 +3,6 @@
 .RData
 .Ruserdata
 *.Rda
-NAMESPACE
+#NAMESPACE
 .Rbuildignore
 #man/
