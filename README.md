@@ -93,3 +93,8 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 Note: For a factor variable f, dydx corresponds to the first difference E(Y|f_i) - E(Y|f_0)
 ```
+
+# Note
+This version of `ame` only supports `glm` objects with 
++ `gaussian` model family with `"identity"` link
++ `binomial` model family with `"logit"`/`"probit"` link
