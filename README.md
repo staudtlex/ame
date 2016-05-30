@@ -29,7 +29,21 @@ gsa$rank <- as.factor(gsa$rank)
 
 # run glm logit model
 glm_fit <- glm(admit ~ gre + gpa + rank, data = gsa, family = binomial(link = "logit"))
-
+summary(glm_fit)
+```
+```
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -3.989979   1.139951  -3.500 0.000465 ***
+gre          0.002264   0.001094   2.070 0.038465 *  
+gpa          0.804038   0.331819   2.423 0.015388 *  
+rank2       -0.675443   0.316490  -2.134 0.032829 *  
+rank3       -1.340204   0.345306  -3.881 0.000104 ***
+rank4       -1.551464   0.417832  -3.713 0.000205 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+```R
 # compute average marginal effects
 glm_ame <- ame(glm_fit, cont_vars = c("gre", "gpa"), fac_vars = c("rank"), nsim = 1000)
 ```
