@@ -19,47 +19,38 @@ devtools::install_github("staudtlex/ame")
 ```
 
 ## Examples
-#### 1. Logit model with fake data
+#### 1. Logit model, graduate school admission data
 ```R
 library(ame)
 
-# generate fake data
-set.seed(100)
-y <- rbinom(100, size = 1, prob = 0.5)
-mcat <- as.factor(rpois(100, 1))
-dummy <- as.factor(rbinom(100, size = 1, prob = 0.5))
-cont <- runif(100, -10, 10)
-data <- data.frame(y, mcat, dummy, cont)
+# graduate school data
+gsa <- read.csv("http://www.ats.ucla.edu/stat/data/binary.csv")
+gsa$rank <- as.factor(gsa$rank)
 
 # run glm logit model
-glm_fit <- glm(y ~ mcat + dummy * cont, data = data, family = binomial(link = "logit"))
+glm_fit <- glm(admit ~ gre + gpa + rank, data = gsa, family = binomial(link = "logit"))
 
 # compute average marginal effects
-glm_ame <- ame(glm_fit, cont_vars = c("cont"), fac_vars = c("mcat", "dummy"), nsim = 1000)
+glm_ame <- ame(glm_fit, cont_vars = c("gre", "gpa"), fac_vars = c("rank"), nsim = 1000)
 ```
 
 Use the `summary()` command to display the average marginal effects and first differences of the model variables:
 ```
-Continuous variables: cont 
-Factor variables:     mcat, dummy 
+Continuous variables: gre, gpa 
+Factor variables:     rank 
 
-             dydx Std. Error z value Pr(>|z|)  
-cont   -0.0131441  0.0085523 -1.5369  0.12183  
-mcat1  -0.3265937  0.1794777 -1.8197  0.06743 .
-mcat2  -0.4169860  0.1796025 -2.3217  0.01984 *
-mcat3  -0.1594161  0.1710301 -0.9321  0.34426  
-mcat4  -0.3370436  0.1735345 -1.9422  0.05107 .
-mcat5   0.0544205  0.1892945  0.2875  0.75826  
-mcat6  -0.1293696  0.2022604 -0.6396  0.51197  
-mcat7  -0.2234591  0.5102121 -0.4380  0.64818  
-mcat8  -0.2191224  0.5145004 -0.4259  0.65678  
-dummy1  0.0544613  0.0841782  0.6470  0.50729  
+             dydx  Std. Error z value  Pr(>|z|)    
+gre    0.00043102  0.00020583  2.0941 0.0355246 *  
+gpa    0.15578509  0.06248429  2.4932 0.0124070 *  
+rank2 -0.15452167  0.07524027 -2.0537 0.0392037 *  
+rank3 -0.28434508  0.07528385 -3.7770 0.0001556 ***
+rank4 -0.31680193  0.08239552 -3.8449 0.0001182 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Note: For a factor variable f, dydx corresponds to the first difference E(Y|f_i) - E(Y|f_0)
 ```
-#### 2. Linear model mtcars-data
+#### 2. Linear model, mtcars-data
 ```R
 # linear model using glm
 lm1 <- glm(mpg ~ cyl * hp + wt, data = mtcars, family = gaussian)
